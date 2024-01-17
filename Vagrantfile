@@ -1,35 +1,87 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-#Deploiement d'un cluster kubernetes avec 2 Masters et 3 Noeuds.
-
-# Configuration de noeuds  maîtres #Master1 #Master2
-MASTER_COUNT = 2
-
 Vagrant.configure("2") do |config|
 
-  # Configuration des nœuds ou worker(s)
-  NODE_COUNT = 3
+  config.vm.define "kubemaster1" do |kub|
+    kub.vm.box = "ubuntu/bionic64"
+    kub.vm.hostname = "kubemaster1"
+    kub.vm.provision "docker"
+    kub.vm.box_url = "ubuntu/bionic64"
 
-  # Configuration commune
-  (1..MASTER_COUNT).each do |i|
-    config.vm.define "master#{i}" do |node|
-      node.vm.box = "k8s_master"
-      node.vm.network "private_network", type: "dhcp"
-      node.vm.provider "virtualbox" do |vb|
-        vb.memory = "2048"
-        vb.cpus = 2
-      end
+    kub.vm.network :private_network, ip: "192.168.56.101"
+
+    kub.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--memory", "2048"]
+      v.customize ["modifyvm", :id, "--name", "kubemaster1"]
+      v.customize ["modifyvm", :id, "--cpus", "2"]
     end
   end
 
-  (1..NODE_COUNT).each do |i|
-    config.vm.define "node#{i}" do |node|
-      node.vm.box = "k8s_node"
-      node.vm.network "private_network", type: "dhcp"
-      node.vm.provider "virtualbox" do |vb|
-        vb.memory = "2048"
-        vb.cpus = 2
-      end
+  config.vm.define "kubemaster2" do |kub|
+    kub.vm.box = "ubuntu/bionic64"
+    kub.vm.hostname = "kubemaster2"
+    kub.vm.provision "docker"
+    kub.vm.box_url = "ubuntu/bionic64"
+
+    kub.vm.network :private_network, ip: "192.168.56.102"
+
+    kub.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--memory", "2048"]
+      v.customize ["modifyvm", :id, "--name", "kubemaster2"]
+      v.customize ["modifyvm", :id, "--cpus", "2"]
     end
   end
+
+  config.vm.define "kubenode1" do |kubenode|
+    kubenode.vm.box = "ubuntu/bionic64"
+    kubenode.vm.hostname = "kubenode1"
+    kubenode.vm.provision "docker"
+    kubenode.vm.box_url = "ubuntu/bionic64"
+
+    kubenode.vm.network :private_network, ip: "192.168.56.201"
+
+    kubenode.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--memory", "2048"]
+      v.customize ["modifyvm", :id, "--name", "kubenode1"]
+      v.customize ["modifyvm", :id, "--cpus", "2"]
+    end
+  end
+
+  config.vm.define "kubenode2" do |kubenode|
+    kubenode.vm.box = "ubuntu/bionic64"
+    kubenode.vm.hostname = "kubenode2"
+    kubenode.vm.provision "docker"
+    kubenode.vm.box_url = "ubuntu/bionic64"
+
+    kubenode.vm.network :private_network, ip: "192.168.56.202"
+
+    kubenode.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--memory", "2048"]
+      v.customize ["modifyvm", :id, "--name", "kubenode2"]
+      v.customize ["modifyvm", :id, "--cpus", "2"]
+    end
+  end
+
+  config.vm.define "kubenode3" do |kubenode|
+    kubenode.vm.box = "ubuntu/bionic64"
+    kubenode.vm.hostname = "kubenode3"
+    kubenode.vm.provision "docker"
+    kubenode.vm.box_url = "ubuntu/bionic64"
+
+    kubenode.vm.network :private_network, ip: "192.168.56.203"
+
+    kubenode.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--memory", "2048"]
+      v.customize ["modifyvm", :id, "--name", "kubenode3"]
+      v.customize ["modifyvm", :id, "--cpus", "2"]
+    end
+  end
+
+end
+
