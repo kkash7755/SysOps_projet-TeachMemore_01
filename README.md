@@ -1,6 +1,6 @@
 # SysOps_projet-TeachMemore_01 Projet réalisé par #Ken KABEYA#
 
-Bootcamp SysOps-Promo1 2024
+Bootcamp SysOps-Promo1-2024
 
 #Création de Vagrantfile + installation de kubernetes "k8s" dans le cadre du projet SysOps
 
