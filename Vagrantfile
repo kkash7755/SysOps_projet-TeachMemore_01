@@ -16,8 +16,8 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  # Provision 3 Worker machines
-  (1..3).each do |i|
+  # Provision 2 Worker machines
+  (1..2).each do |i|
     config.vm.define "node#{i}" do |node|
       node.vm.box = "ubuntu/jammy64"
       node.vm.hostname = "node#{i}"
