@@ -27,7 +27,7 @@ Vagrant.configure("2") do |config|
         vb.cpus = 1
         vb.name = "node#{i}"
       end
-      node.vm.provision "shell", path: "k8s-install.sh"
+      node.vm.provision "shell", path: "setup-kubernetes.sh"
     end
   end
 end
