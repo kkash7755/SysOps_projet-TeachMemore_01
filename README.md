@@ -1,8 +1,9 @@
-#Projet kubernetes 
-#Déploiement d'une application WoprdPress dans un cluster kubernete
-#SysOps_projet-TeachMemore_01 Projet réalisé par #Ken KABEYA#
+#Projet kubernetes - Bootcamp SysOps-Promo1-2024
 
-Bootcamp SysOps-Promo1-2024
+#Déploiement d'une application WoprdPress dans un cluster kubernete On premise et sur AWS
+
+
+
 
 # Infra nécessitant 4 machines 12 Go de RAM 4 CPU
 
