@@ -1,4 +1,5 @@
-#Projet kubernetes #
+#Projet kubernetes 
+#Déploiement d'une application WoprdPress dans un cluster kubernete
 #SysOps_projet-TeachMemore_01 Projet réalisé par #Ken KABEYA#
 
 Bootcamp SysOps-Promo1-2024
