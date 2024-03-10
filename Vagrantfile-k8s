@@ -1,0 +1,30 @@
+# -*- mode : ruby -*-
+# vi: set ft-ruby :
+
+Vagrant.configure("2") do |config|
+  # Provision 1 Master machine
+  config.vm.define "kubemaster" do |k8s|
+    k8s.vm.box = "ubuntu/jammy64"
+    k8s.vm.hostname = "kubemaster"
+    k8s.vm.provider "virtualbox" do |vb|
+      vb.memory = 2048
+      vb.cpus = 1
+      vb.name = "kubemaster"
+    end
+    k8s.vm.provision "shell", path: "k8s-install.sh"
+  end
+
+  # Provision 2 Worker machines
+  (1..2).each do |i|
+    config.vm.define "node#{i}" do |node|
+      node.vm.box = "ubuntu/jammy64"
+      node.vm.hostname = "node#{i}"
+      node.vm.provider "virtualbox" do |vb|
+        vb.memory = 2048
+        vb.cpus = 1
+        vb.name = "node#{i}"
+      end
+      node.vm.provision "shell", path: "setup-kubernetes.sh"
+    end
+  end
+end
